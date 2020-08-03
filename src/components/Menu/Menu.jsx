@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import MenuItem from "../menu-item/MenuItem";
 import "./Menu.scss";
 
@@ -42,8 +43,8 @@ class Menu extends Component {
   render() {
     return (
       <div className="menu">
-        {this.state.sections.map(({ title, id, imageUrl, size }) => (
-          <MenuItem key={id} title={title} image={imageUrl} size={size} />
+        {this.state.sections.map(({ id, ...sectionProps }) => (
+          <MenuItem key={id} {...sectionProps} />
         ))}
       </div>
     );
