@@ -9,7 +9,7 @@ class Shop extends Component {
   render() {
     const { collections } = this.state;
     return (
-      <div>
+      <div className="container">
         {collections.map(({ id, ...otherData }) => (
           <Collection key={id} {...otherData} />
         ))}
