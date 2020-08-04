@@ -1,9 +1,20 @@
 import React, { Component } from "react";
+import SHOP_DATA from "./Shop.data";
+import Collection from "../Collection/Collection";
 
 class Shop extends Component {
-  state = {};
+  state = {
+    collections: SHOP_DATA,
+  };
   render() {
-    return <div></div>;
+    const { collections } = this.state;
+    return (
+      <div>
+        {collections.map(({ id, ...otherData }) => (
+          <Collection key={id} {...otherData} />
+        ))}
+      </div>
+    );
   }
 }
 export default Shop;
