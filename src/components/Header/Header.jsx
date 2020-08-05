@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.scss";
+import { auth } from "../../firebase/firebase.util";
 
-function Header() {
+function Header({ currentUser }) {
   return (
-    <div className="header d-flex  ">
+    <div className="header  ">
       <Link to="/">Logo</Link>
 
-      <div className="options ml-auto">
+      <div className="options ">
         <Link className="option" to="/shop">
           SHOP
         </Link>
@@ -15,6 +16,16 @@ function Header() {
         <Link className="option" to="/contact">
           CONTACT
         </Link>
+
+        {currentUser ? (
+          <span className="option" onClick={() => auth.signOut()}>
+            SIGN OUT
+          </span>
+        ) : (
+          <Link className="option" to="/signin">
+            SIGN IN
+          </Link>
+        )}
       </div>
     </div>
   );

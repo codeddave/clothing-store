@@ -13,8 +13,9 @@ class App extends React.Component {
     currenUser: null,
   };
 
+  unsubscribeFromAuth = null;
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
       this.setState({
         currenUser: user,
       });
@@ -22,11 +23,15 @@ class App extends React.Component {
       console.log(this.state.user);
     });
   }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
   render() {
     return (
       <Router>
         <div className="App container">
-          <Header />
+          <Header currentUser={this.state.currenUser} />
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route exact path="/shop" component={Shop} />
