@@ -4,7 +4,7 @@ import "./FormInput.scss";
 function FormInput({ handleChange, label, ...otherProps }) {
   return (
     <div className="group">
-      <input className="inputt" onChange={handleChange} />
+      <input className="inputt" onChange={handleChange} {...otherProps} />
 
       {label ? (
         <label

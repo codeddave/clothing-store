@@ -5,7 +5,6 @@ import SignIn from "../SignIn/SignIn";
 function User() {
   return (
     <div>
-      <h1>Sign In</h1>
       <SignIn />
     </div>
   );
