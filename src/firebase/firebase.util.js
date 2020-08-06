@@ -14,6 +14,38 @@ const config = {
 
 firebase.initializeApp(config);
 
+// Creates new User in firestore
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  // if user does not exist, leave function
+  if (!userAuth) return;
+
+  // accesses user by its id
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  const snapShot = await userRef.get();
+
+  // if user is authenticated but does not exist in firestore(database), user is adde to firestore.
+  if (!snapShot.exists) {
+    // gets data from the user object
+    const { displayName, email } = userAuth;
+    //Creates new date to note the time every user is created
+    const createdAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("error creating user ", error.message);
+    }
+  }
+
+  return userRef;
+};
+
 export const auth = firebase.auth();
 
 export const firestore = firebase.firestore();
