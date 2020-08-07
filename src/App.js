@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 import "./App.css";
 import Homepage from "./components/Homepage/Homepage";
@@ -41,7 +46,13 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route exact path="/shop" component={Shop} />
-            <Route exact path="/signin" component={User} />
+            <Route
+              exact
+              path="/signin"
+              render={() =>
+                this.props.currentUser ? <Redirect to="/" /> : <User />
+              }
+            />
           </Switch>
         </div>
       </Router>
@@ -49,8 +60,12 @@ class App extends React.Component {
   }
 }
 
+// get state from rootReducer and destructure user from state
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
