@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Header.scss";
 import { auth } from "../../firebase/firebase.util";
+import CartIcon from "../CartIcon/CartIcon";
 
 function Header({ currentUser }) {
   return (
@@ -27,6 +28,7 @@ function Header({ currentUser }) {
             SIGN IN
           </Link>
         )}
+        <CartIcon/>
       </div>
     </div>
   );
