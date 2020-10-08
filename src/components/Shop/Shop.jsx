@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import SHOP_DATA from "./Shop.data";
+import {connect} from "react-redux"
+import{createStructuredSelector} from "reselect"
+import {selectShopCollections} from "../../redux/shop/shopSelectors"
+import SHOP_DATA from "../../redux/shop/Shop.data";
 import Collection from "../Collection/Collection";
 
-class Shop extends Component {
-  state = {
-    collections: SHOP_DATA,
-  };
-  render() {
-    const { collections } = this.state;
+function Shop({collections}){
+  
+  
     return (
       <div className="">
         {collections.map(({ id, ...otherData }) => (
@@ -16,5 +16,10 @@ class Shop extends Component {
       </div>
     );
   }
-}
-export default Shop;
+
+
+const mapstateToProps = createStructuredSelector ({
+
+  collections: selectShopCollections
+})
+export default connect(mapstateToProps)(Shop);
