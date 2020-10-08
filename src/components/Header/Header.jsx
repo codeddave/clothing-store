@@ -6,7 +6,7 @@ import { auth } from "../../firebase/firebase.util";
 import CartIcon from "../CartIcon/CartIcon";
 import CartDropdown from "../CartDropdown/CartDropdown";
 import { selectCurrentUser } from "../../redux/user/user.selector";
-import { selectCartHidden } from "../../redux/cart/cart.selector";
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { createStructuredSelector } from "reselect";
 
 function Header({ currentUser, hidden }) {

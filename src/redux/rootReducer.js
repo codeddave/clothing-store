@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import {persistReducer} from "redux-persist";  
 import userReducer from "./user/userReducer";
 import cartReducer from "./cart/cartReducer"
+import menuReducer from "./menu/menuReducer"
 import storage from "redux-persist/lib/storage";
 
 
@@ -14,7 +15,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  menu: menuReducer
 });
 
 export default persistReducer(persistConfig, rootReducer  )

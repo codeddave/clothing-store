@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { toggleCartHidden } from "../../redux/cart/cartAction";
 import "./CartIcon.scss";
 import { ReactComponent as Cart } from "../../shopping-bag.svg.svg";
-import { selectCartItemsCount } from "../../redux/cart/cart.selector";
+import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
 
 function CartIcon({ toggleCartHidden, itemCount }) {
   return (
