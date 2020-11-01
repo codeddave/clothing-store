@@ -47,15 +47,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 
-export const addCollectionAndDocuments = (collectionKey, objectsToAdd) => {
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
 
  const  collectionRef = firestore.collection(collectionKey)
     const batch = firestore.batch()
 
     objectsToAdd.forEach(obj => {
-      const newDocRef = collectionRef.doc(obj.title)
-      console.log((newDocRef));
+      const newDocRef = collectionRef.doc()
+
+      //batch write  to set all requests, if any of the sets fail, they all fail
+      batch.set(newDocRef, obj)
     })
+
+    // .comit to fire off batch request, returns a promise
+   return await batch.commit()
 }
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
@@ -65,5 +70,5 @@ const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
+ 
 export default firebase;

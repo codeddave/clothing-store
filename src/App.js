@@ -34,7 +34,11 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
-      addCollectionAndDocuments('collections', collectionsObject )
+      //Not passing the entire collectionsObject, don't need the RoutName and id
+      const collectionDetailsToAdd = (collectionsObject) => {
+            collectionsObject.map(({title, items}) =>({ title, items }))
+      }
+      addCollectionAndDocuments('collections', collectionDetailsToAdd(collectionsObject))
     });
   }
 
