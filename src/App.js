@@ -11,15 +11,16 @@ import Homepage from "./components/Homepage/Homepage";
 import Shop from "./components/Shop/Shop";
 import Header from "./components/Header/Header";
 import User from "./components/User/User";
-import { auth, createUserProfileDocument } from "./firebase/firebase.util";
+import { auth, createUserProfileDocument, addCollectionAndDocuments } from "./firebase/firebase.util";
 import { connect } from "react-redux";
 import { setCurrentUser } from ".//redux/user/userAction";
 import Checkout from "./components/Checkout/Checkout";
+import {selectCollectionsForPreview} from "./redux/shop/shopSelectors"
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collectionsObject } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -33,6 +34,7 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+      addCollectionAndDocuments('collections', collectionsObject )
     });
   }
 
@@ -63,8 +65,9 @@ class App extends React.Component {
 }
 
 // get state from rootReducer and destructure user from state
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+  collectionsObject: selectCollectionsForPreview(state)
 });
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),

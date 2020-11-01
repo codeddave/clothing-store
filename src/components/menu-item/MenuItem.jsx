@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./MenuItem.scss";
 
 function MenuItem({ title, imageUrl, size, history, match, linkUrl}) {
-  console.log(match);
+
   return (
     <div
       className={` ${size} menu-item`}
