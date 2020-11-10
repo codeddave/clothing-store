@@ -4,7 +4,12 @@ import CollectionPage from "../CollectionPage/CollectionPage";
 
 import CollectionOverview from "../CollectionOverview/CollectionOverview";
 
-function Shop({ match }) {
+class Shop extends React.Component {
+ 
+  render () {
+
+
+     const {match} = this.props
   return (
     <div className="">
       <Route exact path={`${match.path}`} component={CollectionOverview} />
@@ -12,6 +17,8 @@ function Shop({ match }) {
       <Route path = {`${match.path}/:collectionId`}component={CollectionPage} />
     </div>
   );
+  }
+ 
 }
 
 export default Shop;
