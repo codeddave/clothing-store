@@ -4,14 +4,18 @@ import {selectCollection} from "../../redux/shop/shopSelectors"
 import CollectionItem from '../CollectionItem/CollectionItem'
 import "./CollectionPage.scss"
 
- function CollectionPage({collection}) {
+
+ function CollectionPage({collection, match}) {
      
-     const {items, title} = collection
+     const {items, title,} = collection
      
     return (
         <div className="collection-page">
+            <div >
+              <h2 className="title" >{title}</h2>  
+            </div>
             
-            <h2 className="title">{title}</h2>
+
             <div className="items">
 
                 {

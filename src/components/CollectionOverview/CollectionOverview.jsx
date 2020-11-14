@@ -7,12 +7,12 @@ import "./CollectionOverview.scss"
 import Collection from "../Collection/Collection";
 
 
-function CollectionOverview({collections}) {
+function CollectionOverview({collections, match}) {
     return (
 
         <div className="collection-overview">
              {collections.map(({ id, ...otherData }) => (
-            <Collection key={id} {...otherData} />
+            <Collection key={id} match ={match} {...otherData} />
           ))}
         </div>
        
