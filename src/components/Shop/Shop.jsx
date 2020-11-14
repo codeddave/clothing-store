@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import CollectionPage from "../CollectionPage/CollectionPage";
 
 import CollectionOverview from "../CollectionOverview/CollectionOverview";
-import {firestore} from "../../firebase/firebase.util"
+import {firestore, convertCollectionsSnapsotToMap} from "../../firebase/firebase.util"
 
 class Shop extends React.Component {
  unsubscribeFromSnapShot = null;
@@ -12,7 +12,8 @@ class Shop extends React.Component {
     const collectionRef= firestore.collection('collections')
    
     collectionRef.onSnapshot(async snapShot => {
-      console.log(snapShot.docs);
+         const coll= convertCollectionsSnapsotToMap(snapShot)
+         console.log(coll)
     })
  }
   render () {
