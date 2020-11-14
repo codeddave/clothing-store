@@ -1,19 +1,23 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import CollectionPage from "../CollectionPage/CollectionPage";
-
+import {connect} from "react-redux"
 import CollectionOverview from "../CollectionOverview/CollectionOverview";
 import {firestore, convertCollectionsSnapsotToMap} from "../../firebase/firebase.util"
+import {updateCollections} from "../../redux/shop/shopActions"
 
 class Shop extends React.Component {
  unsubscribeFromSnapShot = null;
 
  componentDidMount() {
+  const {updateCollections} = this.props
     const collectionRef= firestore.collection('collections')
    
     collectionRef.onSnapshot(async snapShot => {
-         const coll= convertCollectionsSnapsotToMap(snapShot)
-         console.log(coll)
+         const collectionsMap= convertCollectionsSnapsotToMap(snapShot)
+         
+         //updates shop reducer with data from Firebase
+         updateCollections(collectionsMap)
     })
  }
   render () {
@@ -31,4 +35,8 @@ class Shop extends React.Component {
  
 }
 
-export default Shop;
+
+const mapDispatchToProps = (dispatch)=> ({
+  updateCollections: (collectionMap)=> dispatch(updateCollections(collectionMap))
+})
+export default connect(null, mapDispatchToProps)(Shop);
