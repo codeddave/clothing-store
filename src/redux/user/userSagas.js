@@ -4,13 +4,22 @@ import {
   googleProvider,
   createUserProfileDocument,
 } from "../../firebase/firebase.util";
+import { googleSignInFailure, googleSignInSuccess } from "./userAction";
 import { userActionTypes } from "./userActionTypes";
 
 export function* googleSignInSaga() {
   try {
-    const userRef = yield auth.signInWithPopup(googleProvider);
-    console.log(userRef);
-  } catch (error) {}
+    const { user } = yield auth.signInWithPopup(googleProvider);
+
+    const userRef = yield call(createUserProfileDocument, user);
+    const userSnapShot = yield userRef.get();
+
+    yield put(
+      googleSignInSuccess({ id: userSnapShot.id, ...userSnapShot.data() })
+    );
+  } catch (error) {
+    yield put(googleSignInFailure(error));
+  }
 }
 
 export function* googleSignInStartSaga() {
@@ -18,5 +27,5 @@ export function* googleSignInStartSaga() {
 }
 
 export function* userSagas() {
-  yield all(call([googleSignInStartSaga]));
+  yield all([call(googleSignInStartSaga)]);
 }
