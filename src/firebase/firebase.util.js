@@ -46,50 +46,48 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
 
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
 
- const  collectionRef = firestore.collection(collectionKey)
-    const batch = firestore.batch()
+    //batch write  to set all requests, if any of the sets fail, they all fail
+    batch.set(newDocRef, obj);
+  });
 
-    objectsToAdd.forEach(obj => {
-      const newDocRef = collectionRef.doc()
-
-      //batch write  to set all requests, if any of the sets fail, they all fail
-      batch.set(newDocRef, obj)
-    })
-
-    // .comit to fire off batch request, returns a promise
-   return await batch.commit()
-}
+  // .comit to fire off batch request, returns a promise
+  return await batch.commit();
+};
 
 export const convertCollectionsSnapsotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
 
-
-    const transformedCollection = collections.docs.map(doc =>  {
-        const {title, items} = doc.data()
-
-        return {
-          routeName: encodeURI(title.toLowerCase()), 
-          id: doc.id,
-          title, 
-          items,
-        }
-    
-    })
-    //to reduce the array, having titles as keys and ach collection object as properties. 
-      return transformedCollection.reduce((accumulator, collection) => {
-        accumulator[collection.title.toLowerCase()] = collection; 
-        return accumulator
-      } ,{})
-}
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+  //to reduce the array, having titles as keys and ach collection object as properties.
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-provider.setCustomParameters({ prompt: "select_account" });
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
- 
+export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+
 export default firebase;
