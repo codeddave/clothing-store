@@ -4,12 +4,7 @@ import {
   googleProvider,
   createUserProfileDocument,
 } from "../../firebase/firebase.util";
-import {
-  googleSignInFailure,
-  googleSignInSuccess,
-  emailSignInSuccess,
-  emailSignInFailure,
-} from "./userAction";
+import { SignInSuccess, SignInFailure } from "./userAction";
 import { userActionTypes } from "./userActionTypes";
 
 export function* googleSignInSaga() {
@@ -17,12 +12,9 @@ export function* googleSignInSaga() {
     const { user } = yield auth.signInWithPopup(googleProvider);
     const userRef = yield call(createUserProfileDocument, user);
     const userSnapShot = yield userRef.get();
-
-    yield put(
-      googleSignInSuccess({ id: userSnapShot.id, ...userSnapShot.data() })
-    );
+    yield put(SignInSuccess({ id: userSnapShot.id, ...userSnapShot.data() }));
   } catch (error) {
-    yield put(googleSignInFailure(error));
+    yield put(SignInFailure(error));
   }
 }
 
@@ -36,11 +28,9 @@ export function* emailSignInSaga({ payload: { email, password } }) {
     const userRef = yield call(createUserProfileDocument, user);
     const userSnapshot = yield userRef.get();
 
-    yield put(
-      emailSignInSuccess({ id: userSnapshot.id, ...userSnapshot.data() })
-    );
+    yield put(SignInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
-    yield put(emailSignInFailure(error));
+    yield put(SignInFailure(error));
   }
 }
 
