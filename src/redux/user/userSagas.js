@@ -7,12 +7,19 @@ import {
 import { SignInSuccess, SignInFailure } from "./userAction";
 import { userActionTypes } from "./userActionTypes";
 
+export function* getSnapshotFromUserAuth(userAuth) {
+  try {
+    const userRef = yield call(createUserProfileDocument, userAuth);
+    const userSnapShot = yield userRef.get();
+    yield put(SignInSuccess({ id: userSnapShot.id, ...userSnapShot.data() }));
+  } catch (error) {
+    yield put(SignInFailure(error));
+  }
+}
 export function* googleSignInSaga() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
-    const userRef = yield call(createUserProfileDocument, user);
-    const userSnapShot = yield userRef.get();
-    yield put(SignInSuccess({ id: userSnapShot.id, ...userSnapShot.data() }));
+    yield getSnapshotFromUserAuth(user);
   } catch (error) {
     yield put(SignInFailure(error));
   }
@@ -25,10 +32,7 @@ export function* googleSignInStartSaga() {
 export function* emailSignInSaga({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    const userRef = yield call(createUserProfileDocument, user);
-    const userSnapshot = yield userRef.get();
-
-    yield put(SignInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+    yield getSnapshotFromUserAuth(user);
   } catch (error) {
     yield put(SignInFailure(error));
   }
