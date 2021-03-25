@@ -4,9 +4,7 @@ import logger from "redux-logger";
 //import thunk from "redux-thunk"
 import createSagaMiddleware from "redux-saga";
 import rootReducer from "./rootReducer";
-import { fetchCollectionsStartSaga } from "./shop/shopSaga";
 import rootSaga from "./rootSaga";
-
 //const middlewares = [thunk];
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];

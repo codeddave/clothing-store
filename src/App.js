@@ -12,10 +12,13 @@ import Shop from "./components/Shop/Shop";
 import Header from "./components/Header/Header";
 import User from "./components/User/User";
 import { connect } from "react-redux";
-import { setCurrentUser } from ".//redux/user/userAction";
+import { checkUserSession } from ".//redux/user/userAction";
 import Checkout from "./components/Checkout/Checkout";
 
-function App({ currentUser }) {
+function App({ currentUser, checkUserSession }) {
+  useEffect(() => {
+    checkUserSession();
+  }, []);
   return (
     <Router>
       <div className="App container">
@@ -39,5 +42,7 @@ function App({ currentUser }) {
 const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
 });
-
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
