@@ -5,7 +5,12 @@ import {
   createUserProfileDocument,
   getCurrentUser,
 } from "../../firebase/firebase.util";
-import { SignInSuccess, SignInFailure } from "./userAction";
+import {
+  SignInSuccess,
+  SignInFailure,
+  signOutSuccess,
+  signOutFailure,
+} from "./userAction";
 import { userActionTypes } from "./userActionTypes";
 
 export function* getSnapshotFromUserAuth(userAuth) {
@@ -56,10 +61,24 @@ export function* isUserAuthenticated() {
 export function* checkUserSessionSaga() {
   yield takeLatest(userActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
+
+export function* signOutSaga() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess());
+  } catch (error) {
+    yield put(signOutFailure());
+  }
+}
+
+export function* signOutStartSaga() {
+  yield takeLatest(userActionTypes.SIGN_OUT_START, signOutSaga);
+}
 export function* userSagas() {
   yield all([
     call(googleSignInStartSaga),
     call(emailSignInStartSaga),
     call(checkUserSessionSaga),
+    call(signOutStartSaga),
   ]);
 }
