@@ -1,7 +1,4 @@
-import {
-  convertCollectionsSnapsotToMap,
-  firestore,
-} from "../../firebase/firebase.util";
+
 import { shopActionTypes } from "./shopActionTypes";
 
 export const fetchCollectionsStart = () => ({
@@ -18,13 +15,7 @@ export const fetchCollectionsFailure = (error) => ({
 
 export const fetchCollectionsStartAsync = () => {
   return (dispatch) => {
-    const collectionRef = firestore.collection("collections");
-    dispatch(fetchCollectionsStart());
-
-    collectionRef.get().then((snapShot) => {
-      const collectionsMap = convertCollectionsSnapsotToMap(snapShot);
-      //updates shop reducer with data from Firebase
-      dispatch(fetchCollectionsSuccess(collectionsMap));
-    });
+  
   };
 };
+ 

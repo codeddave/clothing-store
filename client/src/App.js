@@ -18,7 +18,7 @@ import Checkout from "./components/Checkout/Checkout";
 function App({ currentUser, checkUserSession }) {
   useEffect(() => {
     checkUserSession();
-  }, []);
+  }, [checkUserSession]);
   return (
     <Router>
       <div className="App container">
