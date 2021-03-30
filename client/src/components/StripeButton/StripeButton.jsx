@@ -9,7 +9,7 @@ const StripeCheckoutButton = ({ price }) => {
   const onToken = async (token) => {
     try {
       const res = await axios({
-        url: "/api/payment",
+        url: "https://crwnn-clothes.herokuapp.com/api/payment",
         method: "post",
 
         data: {

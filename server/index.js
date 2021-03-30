@@ -8,12 +8,15 @@ const paymentRoutes = require("./routes/paymentRoutes");
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(express.json());
 app.use(cors());
-
 app.use("/api/payment", paymentRoutes);
 
+app.get("/", (req, res) => {
+  res.send("welcome to crwn-clothing api");
+});
+const port = process.env.PORT || 5500;
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 
@@ -22,4 +25,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(5500);
+app.listen(port);
