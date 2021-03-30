@@ -9,11 +9,9 @@ const payWithStripe = (req, res) => {
   stripe.charges.create(body, (stripeErr, stripeRes) => {
     console.log("im here");
     if (stripeErr) {
-      console.log("damn");
       console.log(stripeErr);
       res.status(500).send({ error: stripeErr });
     } else {
-      consolelog("it works");
       res.status(200).send({ succes: stripeRes });
     }
   });
