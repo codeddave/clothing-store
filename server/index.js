@@ -6,8 +6,6 @@ const paymentRoutes = require("./routes/paymentRoutes");
 
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
-const port = process.env.PORT || 5500;
-
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,8 +22,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen((port, error) => {
-  if (error) throw error;
-
-  console.log("server running on port" + port);
-});
+app.listen(5500);
