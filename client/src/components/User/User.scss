@@ -4,3 +4,15 @@
   justify-content: space-between;
   margin: 30px auto;
 }
+
+@media (max-width: 640px) {
+
+  .signs {
+    width: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+  .sign-up {
+    padding-top: 80px;
+  }
+}

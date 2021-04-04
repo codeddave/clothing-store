@@ -6,14 +6,13 @@ const payWithStripe = (req, res) => {
     currency: "usd",
   };
   stripe.charges.create(body, (stripeErr, stripeRes) => {
-    console.log("im here");
     if (stripeErr) {
-      console.log(stripeErr);
-      res.status(500).send({ error: stripeErr });
+      res.status(500).json({ error: stripeErr });
     } else {
-      res.status(200).send({ success: stripeRes });
+      res.status(200).json({ success: stripeRes });
     }
   });
+  res.status(200).json({ success: "done" });
 };
 
 exports.payWithStripe = payWithStripe;

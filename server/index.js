@@ -15,6 +15,7 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.send("welcome to crwn-clothing api");
 });
+
 app.use("/api/payment", paymentRoutes);
 
 const port = process.env.PORT || 5500;
