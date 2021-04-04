@@ -2,8 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import "./MenuItem.scss";
 
-function MenuItem({ title, imageUrl, size, history, match, linkUrl}) {
-
+function MenuItem({ title, imageUrl, size, history, match, linkUrl }) {
   return (
     <div
       className={` ${size} menu-item`}

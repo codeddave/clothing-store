@@ -1,7 +1,6 @@
 .menu-item {
   min-width: 30%;
   height: 240px;
-  flex: 1 1 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +66,11 @@
 
 @media (max-width: 640px) {
   .menu-item {
-   
+  
+
+    &.large {
+      height: 240px;
+    }
   
     .content {
       height: 90px;
