@@ -9,7 +9,7 @@ import CustomButton from "../CustomButton/CustomButton";
 function CollectionItem({ item, addItem }) {
   const { name, price, imageUrl } = item;
   return (
-    <div className="collection-item ml-4 ">
+    <div className="collection-item">
       <div
         style={{
           backgroundImage: `url(${imageUrl})`,
@@ -20,7 +20,11 @@ function CollectionItem({ item, addItem }) {
         <span className="name">{name}</span>
         <span className="price">${price}</span>
       </div>
-      <CustomButton onClick={() => addItem(item)} inverted={true}>
+      <CustomButton
+        onClick={() => addItem(item)}
+        inverted={true}
+        className="custom-button"
+      >
         Add To Cart
       </CustomButton>
     </div>

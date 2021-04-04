@@ -1,15 +1,12 @@
 import React from "react";
 import "./Homepage.scss";
 import Menu from "../Menu/Menu";
-import {HomepageContainer} from "./HomepageStyles"
+import { HomepageContainer } from "./HomepageStyles";
 function Homepage() {
   return (
     <HomepageContainer>
-
-       <Menu />
+      <Menu />
     </HomepageContainer>
-     
-    
   );
 }
 export default Homepage;

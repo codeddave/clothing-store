@@ -1,7 +1,5 @@
 .collection-page {
-    display: flex;
-    flex-direction: column;
-  
+
     .title {
       font-size: 38px;
       margin: 0 auto 30px;
@@ -9,7 +7,7 @@
   
     .items {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       grid-gap: 10px;
   
       & .collection-item {
@@ -17,4 +15,23 @@
       }
     }
   }
+
+
+  @media (max-width: 768px) {
+    .collection-page {
+      .items {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+  }
+  @media (max-width: 640px) {
+    .collection-page {
+      .items {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+  }
+  
   
