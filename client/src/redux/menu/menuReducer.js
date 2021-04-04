@@ -1,46 +1,49 @@
 const INITIAL_STATE = {
-
-    sections: [
-        {
-          title: "hats",
-          imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-          id: 1,
-          linkUrl: "shop/hats",
-        },
-        {
-          title: "jackets",
-          imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-          id: 2,
-          linkUrl: "shop/jackets",
-        },
-        {
-          title: "sneakers",
-          imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-          id: 3,
-          linkUrl: "shop/sneakers",
-        },
-        {
-          title: "womens",
-          imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-          size: "large",
-          id: 4,
-          linkUrl: "shop/womens",
-        },
-        {
-          title: "mens",
-          imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-          size: "large",
-          id: 5,
-          linkUrl: "shop/mens",
-        },
-      ],
-}
+  sections: [
+    {
+      title: "hats",
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/clothing-store-b3d8e.appspot.com/o/stuff%2Fsahil-pandita-83c_IVAEufA-unsplash.jpg?alt=media&token=198cf00f-fcf2-49da-9823-00713c02dd3f",
+      id: 1,
+      linkUrl: "shop/hats",
+    },
+    {
+      title: "jackets",
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/clothing-store-b3d8e.appspot.com/o/stuff%2Famanda-vick-ohWf6YuzOQk-unsplash.jpg?alt=media&token=26946b2e-5377-43a3-b3dd-a79fb2ef7633",
+      id: 2,
+      linkUrl: "shop/jackets",
+    },
+    {
+      title: "sneakers",
+      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
+      id: 3,
+      linkUrl: "shop/sneakers",
+    },
+    {
+      title: "womens",
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/clothing-store-b3d8e.appspot.com/o/stuff%2Fharry-cunningham-J5BcbMVvQ0k-unsplash.jpg?alt=media&token=f35b5576-2c7c-4e50-90b4-d9df90148836",
+      size: "large",
+      id: 4,
+      linkUrl: "shop/womens",
+    },
+    {
+      title: "mens",
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/clothing-store-b3d8e.appspot.com/o/stuff%2Fjonathan-borba-4JtQtLb6ups-unsplash.jpg?alt=media&token=817dbec9-e4d8-495d-b6ab-80c2e1b53c8c",
+      size: "large",
+      id: 5,
+      linkUrl: "shop/mens",
+    },
+  ],
+};
 
 const menuReducer = (state = INITIAL_STATE, action) => {
-    switch(action.type) {
-        default: 
-        return state
-    }
-}
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
 
-export default menuReducer
+export default menuReducer;
