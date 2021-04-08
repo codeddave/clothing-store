@@ -16,7 +16,8 @@ const INITIAL_STATE = {
     },
     {
       title: "sneakers",
-      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
+      imageUrl:
+        "https://firebasestorage.googleapis.com/v0/b/clothing-store-b3d8e.appspot.com/o/stuff%2Fsolesavy-2tfHt0sfv3w-unsplash.jpg?alt=media&token=99763fc0-16ad-4097-a40a-c0ac8161d984",
       id: 3,
       linkUrl: "shop/sneakers",
     },
