@@ -15,6 +15,7 @@ import { checkUserSession } from ".//redux/user/userAction";
 const Homepage = lazy(() => import("./components/Homepage/Homepage"));
 const CheckoutPage = lazy(() => import("./components/Checkout/Checkout"));
 const ShopPage = lazy(() => import("./components/Shop/Shop"));
+const UserPage = lazy(() => import("./components/User/User"));
 
 function App({ currentUser, checkUserSession }) {
   useEffect(() => {
@@ -27,14 +28,15 @@ function App({ currentUser, checkUserSession }) {
         <Switch>
           <Suspense fallback={<div>loading</div>}>
             <Route exact path="/" component={Homepage} />
+
+            <Route path="/shop" component={ShopPage} />
+            <Route
+              exact
+              path="/signin"
+              render={() => (currentUser ? <Redirect to="/" /> : <User />)}
+            />
+            <Route exact path="/checkout" component={CheckoutPage} />
           </Suspense>
-          <Route path="/shop" component={ShopPage} />
-          <Route
-            exact
-            path="/signin"
-            render={() => (currentUser ? <Redirect to="/" /> : <User />)}
-          />
-          <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     </Router>
