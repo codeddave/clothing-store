@@ -10,7 +10,7 @@ function Collection({ title, items, routeName, match  }) {
     <div className="collection ">
 
       <h1 onClick={()=> history.push(`${match.url}/${routeName}`)} >{title.toUpperCase()}</h1>
-      <div className="preview   ">
+      <div className="preview ">
         {items
           .filter((item, idx) => idx < 4)
           .map((item) => (

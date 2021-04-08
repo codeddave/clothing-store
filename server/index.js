@@ -17,7 +17,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/payment", paymentRoutes);
-
 const port = process.env.PORT || 5500;
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));

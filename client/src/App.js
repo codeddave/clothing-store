@@ -10,8 +10,8 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import User from "./components/User/User";
 import { connect } from "react-redux";
-import { checkUserSession } from ".//redux/user/userAction";
-
+import { checkUserSession } from "./redux/user/userAction";
+import Spinner from "./components/Spinner/Spinner";
 const Homepage = lazy(() => import("./components/Homepage/Homepage"));
 const CheckoutPage = lazy(() => import("./components/Checkout/Checkout"));
 const ShopPage = lazy(() => import("./components/Shop/Shop"));
@@ -26,7 +26,7 @@ function App({ currentUser, checkUserSession }) {
       <div className="App container">
         <Header />
         <Switch>
-          <Suspense fallback={<div>loading</div>}>
+          <Suspense fallback={<Spinner />}>
             <Route exact path="/" component={Homepage} />
 
             <Route path="/shop" component={ShopPage} />
