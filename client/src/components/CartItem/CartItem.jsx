@@ -6,7 +6,7 @@ function CartItem({ item: { imageUrl, price, name, quantity } }) {
     <div className="cart-item">
       <img src={imageUrl} alt="item" />
 
-      <div className="item-details">
+      <div className="item-dejbjails">
         <span className="name">{name}</span>
         <span className="price">
           {quantity} x ${price}
@@ -15,4 +15,4 @@ function CartItem({ item: { imageUrl, price, name, quantity } }) {
     </div>
   );
 }
-export default CartItem;
+export default React.memo(CartItem);

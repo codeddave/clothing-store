@@ -3,7 +3,6 @@ import "./Homepage.scss";
 import Menu from "../Menu/Menu";
 import { HomepageContainer } from "./HomepageStyles";
 function Homepage() {
-  throw Error;
   return (
     <HomepageContainer>
       <Menu />
