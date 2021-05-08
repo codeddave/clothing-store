@@ -16,7 +16,6 @@ import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 const Homepage = lazy(() => import("./components/Homepage/Homepage"));
 const CheckoutPage = lazy(() => import("./components/Checkout/Checkout"));
 const ShopPage = lazy(() => import("./components/Shop/Shop"));
-const UserPage = lazy(() => import("./components/User/User"));
 
 function App({ currentUser, checkUserSession }) {
   useEffect(() => {
